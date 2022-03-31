@@ -1,0 +1,64 @@
+body{
+    font-family: 'Lexend Deca', sans-serif;
+}
+*{
+    box-sizing: border-box;
+}
+.container{
+    width: 100%;
+    min-width: 375px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.logo{
+    margin: 68px 0 20px 0;
+    width: 180px;
+    height: 178.38px;
+}
+.page{
+    padding: 22px 17px 0 17px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+form input{
+    width: 303px;
+    height: 45px;
+    border: 1px solid #D5D5D5;
+    border-radius: 5px;
+    margin-bottom: 6px;
+    font-size: 20px;
+    line-height:25px;
+    padding: 0 11px 0 11px;
+}
+form button{
+    width: 303px;
+    height: 45px;
+    background: #52B6FF;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 21px;
+    line-height: 26px;
+    color: #FFFFFF;
+}
+form p{
+    font: size 14px;
+    text-decoration-line: underline;
+    line-height: 17px;
+    text-align: center;
+    color: #52B6FF;
+}
