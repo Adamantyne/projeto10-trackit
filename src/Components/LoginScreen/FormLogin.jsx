@@ -10,7 +10,8 @@ function FormLogin() {
     const [userData, setUserData] = useState({ email: "", password: "" });
     const [disabled, setDisabled] = useState({ status: false, opacity: 1, currentText: "Entrar" });
     const navigate = useNavigate();
-    const {globalData,setGlobalData} = GetUserContext();
+    const {setGlobalData} = GetUserContext();
+    const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/";
 
     function submitData(event) {
         event.preventDefault();
@@ -24,9 +25,9 @@ function FormLogin() {
         promisse.then(response => {
             const data = response.data;
             setDisabled({ status: false, opacity: 1, currentText: "Entrar" });
-            localStorage.setItem("storageData",JSON.stringify({...data}));
-            setGlobalData({...data});
-            //navigate("/");
+            localStorage.setItem("storageData",JSON.stringify({...data,url:URL}));
+            setGlobalData({...data,url:URL});
+            navigate("/habits");
         });
         promisse.catch(error => {
             console.log(error.response);

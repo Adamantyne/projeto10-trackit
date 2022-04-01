@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import UserProvider from "../../contexts/UserProvider";
 import LoginScreen from "../LoginScreen";
 import RegistrationScreen from "../RegistrationScreen";
+import Habits from "../Habits";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<LoginScreen />} />
                         <Route path="/registration" element={<RegistrationScreen />} />
+                        <Route path="/habits" element={<Habits />} />
                     </Routes>
                 </BrowserRouter>
             </UserProvider>

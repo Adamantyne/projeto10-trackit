@@ -10,7 +10,6 @@ function UserProvider(props){
             setGlobalData(JSON.parse(userStorage));
         }
     },[])
-    console.log(globalData);
     return(
         <UserContext.Provider value={{globalData,setGlobalData}}>
             {props.children}

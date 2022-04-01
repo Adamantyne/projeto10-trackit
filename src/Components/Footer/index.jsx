@@ -1,8 +1,11 @@
 import "./footer.css"
 
-function Footer(props) {
+function Footer() {
     return (
         <footer>
+            <p>Hábitos</p>
+            <p>circulo</p>
+            <p>Histórico</p>
         </footer>
     );
 }
