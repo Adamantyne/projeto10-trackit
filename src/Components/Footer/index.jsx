@@ -1,10 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 import "./footer.css"
 
 function Footer() {
+    const navigate = useNavigate();
     return (
         <footer>
-            <p>Hábitos</p>
-            <p>circulo</p>
+            <p onClick={()=>{navigate("/habits");}}>Hábitos</p>
+            <p onClick={()=>{navigate("/today");}}>circulo</p>
             <p>Histórico</p>
         </footer>
     );

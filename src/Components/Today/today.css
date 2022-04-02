@@ -1,0 +1,55 @@
+.today-habits h2{
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 28px;
+}
+.today-habit{
+    width: 340px;
+    height: 94px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    padding: 13px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.task{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.task h3{
+    font-size: 20px;
+    line-height: 25px;
+    color: #666666;
+}
+.task p{
+    font-size: 13px;
+    line-height: 16px;
+    color: #666666;
+}
+.done-false,.done-true{
+    min-width: 69px;
+    height: 69px;
+    font-size: 50px;
+    color: white;
+    border-radius: 5px;
+    background-color: #EBEBEB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.done-true{
+    background-color: #8FC549;
+}
+.title-false{
+    color: #BABABA;
+}
+.text-false{
+    color: #666666;
+  }
+.text-true{
+  color: #8FC549;
+}

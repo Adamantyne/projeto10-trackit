@@ -12,19 +12,22 @@ function Habits() {
     const [habitsList, setHabitsList] = useState([]);
     const { globalData } = GetUserContext();
     const { token, url } = globalData;
+    console.log(habitsList);
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         }
     };
-    
+
     useEffect(() => {
-        const promisse = axios.get(`${url}habits`, config);
-        promisse.then(response => {
-            const data = response.data;
-            setHabitsList(data);
-        });
-        promisse.catch(error => { console.log(error.response); });
+        if (token.length > 0) {
+            const promisse = axios.get(`${url}habits`, config);
+            promisse.then(response => {
+                const data = response.data;
+                setHabitsList(data);
+            });
+            promisse.catch(error => { console.log(error.response); });
+        }
     }, [globalData]);
 
 
@@ -43,7 +46,7 @@ function Habits() {
     }
 
     return (
-        <div className="container" style={{ backgroundColor: "#F2F2F2" }}>
+        <div className="containerPage">
             <Header globalData={globalData} />
             <section className="page">
                 <CreatingHabits habitsList={habitsList} setHabitsList={setHabitsList} config={config} />
