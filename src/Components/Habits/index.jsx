@@ -12,7 +12,6 @@ function Habits() {
     const [habitsList, setHabitsList] = useState([]);
     const { globalData } = GetUserContext();
     const { token, url } = globalData;
-    console.log(habitsList);
     const config = {
         headers: {
             Authorization: `Bearer ${token}`

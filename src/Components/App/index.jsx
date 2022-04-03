@@ -7,6 +7,7 @@ import LoginScreen from "../LoginScreen";
 import RegistrationScreen from "../RegistrationScreen";
 import Habits from "../Habits";
 import Today from "../Today";
+import Historic from "../Historic";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
                         <Route path="/registration" element={<RegistrationScreen />} />
                         <Route path="/habits" element={<Habits />} />
                         <Route path="/today" element={<Today />} />
+                        <Route path="/historic" element={<Historic />} />
                     </Routes>
                 </BrowserRouter>
             </UserProvider>

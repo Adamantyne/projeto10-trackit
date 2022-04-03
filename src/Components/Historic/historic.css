@@ -1,0 +1,43 @@
+.no-historic{
+    font-size: 18px;
+    line-height: 22px;
+    color: #666666;
+}
+.historic h1{
+    font-size: 23px;
+    line-height: 29px;
+    color: #126BA5;
+    margin-bottom: 17px;
+}
+.historic h2{
+    font-size: 18px;
+    line-height: 22px;
+    color: #666666;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+.historic-habit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    width: 340px;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.historic-true{
+    border: solid 5px #8FC549;
+    color: #4c6827;
+    background-color: #fcfff8;
+}
+.historic-false{
+    border: solid 5px #dd5050;
+    color:#581d1d;
+    background-color: #fff9f9;
+}
+.historic p{
+    font-size: 14px;
+    line-height: 22px;
+    color: #666666;
+}

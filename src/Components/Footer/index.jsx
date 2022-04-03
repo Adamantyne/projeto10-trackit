@@ -8,7 +8,7 @@ function Footer() {
         <footer>
             <p onClick={()=>{navigate("/habits");}}>Hábitos</p>
             <p onClick={()=>{navigate("/today");}}>circulo</p>
-            <p>Histórico</p>
+            <p onClick={()=>{navigate("/historic");}}>Histórico</p>
         </footer>
     );
 }
