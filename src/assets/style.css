@@ -2,7 +2,7 @@
     box-sizing: border-box;
     font-family: 'Lexend Deca', sans-serif;
 }
-.container,.containerPage{
+.containerPage{
     width: 100%;
     min-width: 375px;
     min-height: 100vh;

@@ -1,6 +1,7 @@
 import "./historic.css"
 import { useState, useEffect } from "react";
 import axios from "axios";
+import styled from 'styled-components';
 
 import Header from "../Header";
 import Footer from "../Footer";
@@ -33,13 +34,13 @@ function Historic() {
         <>
             <Header globalData={globalData} />
             <div className="containerPage">
-                <section className="page historic">
+                <HistoricStyle>
                     <h1>Histórico</h1>
                     {
                         historic.length === 0 ?
-                            <p className="no-historic">
+                            <NoHistoric>
                                 Em breve você poderá ver o histórico dos seus hábitos aqui!
-                            </p> :
+                            </NoHistoric> :
                             <>{historic.map(days => {
                                 const { day, habits } = days;
                                 return (
@@ -49,7 +50,7 @@ function Historic() {
                                 );
                             })}</>
                     }
-                </section>
+                </HistoricStyle>
             </div>
             <Footer globalData={globalData} />
         </>
@@ -110,4 +111,36 @@ function weekDayName(weekDay){
     }
     return day;
 }
+const HistoricStyle = styled.section`
+    width: 100%;
+    max-width: 375px;
+    margin: 70px 0 70px 0;
+    padding: 22px 17px 0 17px;
+    display: flex;
+    flex-direction: column;
+
+    h1{
+        font-size: 23px;
+        line-height: 29px;
+        color: #126BA5;
+        margin-bottom: 17px;
+    }
+    h2{
+        font-size: 18px;
+        line-height: 22px;
+        color: #666666;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+    p{
+        font-size: 14px;
+        line-height: 22px;
+        color: #666666;
+    }
+`;
+const NoHistoric = styled.p`
+font-size: 18px;
+line-height: 22px;
+color: #666666;
+`;
 export default Historic;

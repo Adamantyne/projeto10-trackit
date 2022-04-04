@@ -6,6 +6,7 @@ import Footer from "../Footer";
 import Header from "../Header";
 import CreatingHabits from "./CreatingHabits";
 import CreatedHabits from "./CreatedHabits";
+import styled from 'styled-components';
 import "./habits.css";
 
 function Habits() {
@@ -30,18 +31,21 @@ function Habits() {
     }, [globalData]);
 
 
-    function excludingHabit(currentID) {
-        const promisse = axios.delete(`${url}habits/${currentID}`, config);
-        promisse.then(response => {
-            const deleted = habitsList.filter(habit => {
-                if (habit.id !== currentID) {
-                    return true;
-                }
-                return false;
+    function excludingHabit(currentID, name) {
+        const choice = window.confirm(`deseja mesmo excluir o hábito "${name}" ?`);
+        if (choice === true) {
+            const promisse = axios.delete(`${url}habits/${currentID}`, config);
+            promisse.then(response => {
+                const deleted = habitsList.filter(habit => {
+                    if (habit.id !== currentID) {
+                        return true;
+                    }
+                    return false;
+                });
+                setHabitsList(deleted);
             });
-            setHabitsList(deleted);
-        });
-        promisse.catch(error => { console.log(error.response); });
+            promisse.catch(error => { console.log(error.response); });
+        }
     }
 
     return (
@@ -51,9 +55,9 @@ function Habits() {
                 <CreatingHabits habitsList={habitsList} setHabitsList={setHabitsList} config={config} />
                 {
                     habitsList.length === 0 ?
-                        <p className="no-habits">Você não tem nenhum hábito cadastrado ainda.
+                        <NoAbits className="no-habits">Você não tem nenhum hábito cadastrado ainda.
                             Adicione um hábito para começar a trackear!
-                        </p>
+                        </NoAbits>
                         :
                         <>
                             {habitsList.map(habit => {
@@ -75,4 +79,11 @@ function Habits() {
         </div>
     );
 }
+
+const NoAbits = styled.p`
+font-size: 18px;
+line-height: 22px;
+color: #666666;
+margin-top: 8px;
+`;
 export default Habits;

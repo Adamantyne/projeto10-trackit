@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import dayjs from 'dayjs'
+import styled from 'styled-components';
 
 import GetUserContext from "../../contexts/GetUserContext";
 import Header from "../Header";
@@ -11,12 +12,12 @@ import "./today.css";
 function Today() {
     const [todayHabits, setTodayHabits] = useState([]);
     const [numberHabits, setNumberHabits] = useState({ total: 1, completed: 0 });
-    const { globalData } = GetUserContext();
-    const { token, url } = globalData;
+    const { globalData,setGlobalData } = GetUserContext();
+    const { token, url,percentage } = globalData;
     const config = { headers: { Authorization: `Bearer ${token}` } };
-    const percentage = ((numberHabits.completed / numberHabits.total) * 100).toFixed(0);
+    const currentPercentage = ((numberHabits.completed / numberHabits.total) * 100).toFixed(0);
     let completedNumber = 0;
-    
+
     const updateLocale = require('dayjs/plugin/updateLocale');
     dayjs.extend(updateLocale); 
     const todayDate = dayjs().format('dddd, DD/MM');
@@ -49,6 +50,7 @@ function Today() {
             promisse.catch(error => { console.log(error.response); });
         }
     }
+
     function updatePercentage() {
         if (todayHabits.length > numberHabits.total ||
             completedNumber !== numberHabits.completed) {
@@ -57,6 +59,10 @@ function Today() {
             );
         }
     }
+    if(currentPercentage!==percentage && numberHabits.total=== todayHabits.length ){
+        setTimeout(()=>{setGlobalData({...globalData,percentage:currentPercentage});},100);
+    }
+
     function getTodayHabits() {
         const promisse = axios.get(`${url}habits/today`, config);
         promisse.then(response => {
@@ -65,13 +71,12 @@ function Today() {
         });
         promisse.catch(error => { console.log(error.response); });
     }
-
     return (
         <>
             <Header globalData={globalData} />
             <div className="containerPage">
-                <section className="page today-habits">
-                    <h1 className="todayDate">{todayDate}</h1>
+                <TodayHabits>
+                    <TodayDate>{todayDate}</TodayDate>
                     <Title percentage={percentage} completedNumber={numberHabits.completed} />
                     {
                         todayHabits.map((todayHabit, index) => {
@@ -83,7 +88,7 @@ function Today() {
                                 updatePercentage();
                             }
                             return (
-                                <article key={id} className="today-habit">
+                                <TodayHabit key={id}>
                                     <TaskText
                                         name={name}
                                         done={done}
@@ -96,13 +101,13 @@ function Today() {
                                         id={id}
                                         todayHabit={todayHabit}
                                     />
-                                </article>
+                                </TodayHabit>
                             );
                         })
                     }
-                </section>
+                </TodayHabits>
             </div>
-            <Footer globalData={globalData} />
+            <Footer />
         </>
     );
 }
@@ -117,7 +122,7 @@ function Title(props) {
 function TaskText(props) {
     const { name, done, currentSequence, highestSequence } = props;
     return (
-        <section className="task">
+        <Task>
             <h3>{name}</h3>
             <div className="sequence">
                 <p>Sequência atual:
@@ -131,7 +136,7 @@ function TaskText(props) {
                         {highestSequence === 1 ? " dia" : " dias"}
                     </strong></p>
             </div>
-        </section>
+        </Task>
     );
 }
 function IconCheck(props) {
@@ -143,4 +148,52 @@ function IconCheck(props) {
         </section>
     );
 }
+
+const TodayHabits = styled.footer`
+width: 100%;
+    max-width: 375px;
+    margin: 70px 0 70px 0;
+    padding: 22px 17px 0 17px;
+    display: flex;
+    flex-direction: column;
+h2{
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 28px;
+}
+`;
+const TodayDate = styled.h1`
+    font-size: 23px;
+    line-height: 29px;
+    color: #126BA5;
+`;
+const TodayHabit = styled.article`
+width: 340px;
+height: 94px;
+background: #FFFFFF;
+border-radius: 5px;
+padding: 13px;
+margin-bottom: 10px;
+display: flex;
+justify-content: space-between;
+`;
+const Task = styled.section`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    h3{
+        font-size: 20px;
+        line-height: 25px;
+        color: #666666;
+    }
+    p{
+        font-size: 13px;
+        line-height: 16px;
+        color: #666666;
+    }
+`;
+
 export default Today;

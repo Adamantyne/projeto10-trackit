@@ -1,6 +1,6 @@
 import { Link , useNavigate} from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Bars } from  'react-loader-spinner'
 
 import GetUserContext from "../../contexts/GetUserContext";
@@ -20,13 +20,13 @@ function FormLogin() {
             });
 
         const promisse = axios.post(
-            "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", userData
+            `${URL}auth/login`, userData
         );
         promisse.then(response => {
             const data = response.data;
             setDisabled({ status: false, opacity: 1, currentText: "Entrar" });
-            localStorage.setItem("storageData",JSON.stringify({...data,url:URL}));
-            setGlobalData({...data,url:URL});
+            localStorage.setItem("storageData",JSON.stringify({...data,url:URL,percentage:0}));
+            setGlobalData({...data,url:URL,percentage:0});
             navigate("/habits");
         });
         promisse.catch(error => {
@@ -35,6 +35,28 @@ function FormLogin() {
             setDisabled({ status: false, opacity: 1, currentText: "Entrar" });
         });
     }
+
+    //login automático
+    useEffect(()=>{
+        const userStorage = localStorage.getItem("storageData")
+        if(userStorage){
+            const userStorageJSON = JSON.parse(userStorage)
+            const objectData = {email:userStorageJSON.email, password:userStorageJSON.password };
+            const promisse = axios.post(
+                `${URL}auth/login`, objectData
+            );
+            promisse.then(response => {
+                const data = response.data;
+                setGlobalData({...data,url:URL,percentage:0});
+                navigate("/habits");
+            });
+            promisse.catch(error => {
+                console.log(error.response);
+            });
+
+        }
+    },[]);
+
     return (
         <form onSubmit={(event) => submitData(event)}>
             <InputForm

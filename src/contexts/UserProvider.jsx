@@ -2,7 +2,7 @@ import { useState,useEffect } from "react";
 import UserContext from "./UserContext";
 
 function UserProvider(props){
-    const[globalData, setGlobalData]=useState({token:""})
+    const[globalData, setGlobalData]=useState({token:"",percentage:0})
 
     useEffect(()=>{
         const userStorage = localStorage.getItem("storageData")

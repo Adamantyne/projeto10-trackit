@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import styled from 'styled-components';
 
 //import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
@@ -13,7 +14,7 @@ function App() {
 
 
     return (
-        <main className="container">
+        <Container>
             <UserProvider>
                 <BrowserRouter>
                     <Routes>
@@ -25,7 +26,16 @@ function App() {
                     </Routes>
                 </BrowserRouter>
             </UserProvider>
-        </main>
+        </Container>
     );
 }
 export default App;
+
+const Container = styled.main`
+    width: 100%;
+    min-width: 375px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;

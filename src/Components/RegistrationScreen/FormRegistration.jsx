@@ -26,7 +26,13 @@ function FormRegistration() {
         });
         promisse.catch(error => {
             console.log(error.response);
-            alert("Verifique os dados e tente novamente...");
+            console.log(error.response.status);
+            if(error.response.status===409){
+                alert("Email ou senha já existente...");
+            }
+            else{
+                alert("Verifique se os dados são válidos e tente novamente...");
+            }
             setDisabled({ status: false, opacity: 1, currentText: "Cadastrar" });
         });
     }
